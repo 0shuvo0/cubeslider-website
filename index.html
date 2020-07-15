@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="CubeSlider is a easy to use JavaScript library to cread awesome 3D cube based image slider">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="MdShuvo">
+	<meta name="robots" content="index, follow">
+	<link rel="icon" href="favicon.ico">
+	<link href="css/rainbow/monokai.css" rel="stylesheet" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/cubeslider.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>CubeSlider</title>
+</head>
+<body>
+	<div id="loader"></div>
+	<div class="container">
+		
+		<div class="banner">
+			<div class="cell info">
+				<h1>CubeSlider</h1>
+				<p>CubeSlider is a easy to use library to easily create awesome 3d cubic image slider.</p>
+				<a class="btn" href="#start">get started</a>
+				<a class="btn ml" href="https://github.com/0shuvo0/cubeslider"><svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">    <path d="M10.9,2.1c-4.6,0.5-8.3,4.2-8.8,8.7c-0.5,4.7,2.2,8.9,6.3,10.5C8.7,21.4,9,21.2,9,20.8v-1.6c0,0-0.4,0.1-0.9,0.1 c-1.4,0-2-1.2-2.1-1.9c-0.1-0.4-0.3-0.7-0.6-1C5.1,16.3,5,16.3,5,16.2C5,16,5.3,16,5.4,16c0.6,0,1.1,0.7,1.3,1c0.5,0.8,1.1,1,1.4,1 c0.4,0,0.7-0.1,0.9-0.2c0.1-0.7,0.4-1.4,1-1.8c-2.3-0.5-4-1.8-4-4c0-1.1,0.5-2.2,1.2-3C7.1,8.8,7,8.3,7,7.6C7,7.2,7,6.6,7.3,6 c0,0,1.4,0,2.8,1.3C10.6,7.1,11.3,7,12,7s1.4,0.1,2,0.3C15.3,6,16.8,6,16.8,6C17,6.6,17,7.2,17,7.6c0,0.8-0.1,1.2-0.2,1.4 c0.7,0.8,1.2,1.8,1.2,3c0,2.2-1.7,3.5-4,4c0.6,0.5,1,1.4,1,2.3v2.6c0,0.3,0.3,0.6,0.7,0.5c3.7-1.5,6.3-5.1,6.3-9.3 C22,6.1,16.9,1.4,10.9,2.1z"/></svg> <span>github</span></a>
+			</div>
+			<div class="cell img">
+				<div class="cube-slider"></div>
+			</div>
+		</div><!-- /banner --->
+		
+		
+		<div class="section" id="start">
+			<h1>Installing CubeSlider</h1>
+			<h1 class="sub-header">Using npm</h1>
+			<pre><code>npm i cubeslider</code></pre>
+			<h1 class="sub-header">Or <a href="assets/cubeslider.zip" download>download zip</a></h1>
+<pre>
+<code data-language="html">&lt;link rel="stylesheet" href="css/cubeslider.min.css"&gt;
+&lt;script src="js/cubeslider.min.js" defer&gt;&lt;/script&gt;</code>
+</pre>
+		</div><!-- /installation -->
+		
+		
+		<div class="section">
+			<h1>Creating slider</h1>
+			<h1 class="sub-header">HTML:</h1>
+<pre><code data-language="html">&lt;div class="cube-slider my-slider"&gt;&lt;/div&gt;</code></pre>
+			<h1 class="sub-header">JS:</h1>
+<pre data-language="javascript">
+<code>/*
+*If you used npm, you have to import the js as CSS file like Thus
+*assuming you have proper bundler setup
+*skip these imports you used link and script tags
+*/
+import initCubeSlider from "cubeslider"
+import "../node_modules/cubeslider/css/cubeslider.css"
+
+
+//creating slider
+initCubeSlider({
+    el: '.my-slider',
+    slides: ["img/1.jpg", "img/2.jpg"] //add up to 6 images
+    //add extra options here
+})
+</code>
+</pre>
+		</div><!-- /creating slider -->
+		
+		
+		<div class="section">
+			<h1>Available options</h1>
+			<table>
+				<tr>
+					<td>name</td>
+					<td>description</td>
+					<td>default</td>
+				</tr>
+				<tr>
+					<td>row</td>
+					<td>Number of rows slider should have</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<td>col</td>
+					<td>Number of column each row should have</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td>controls</td>
+					<td>If the slider should have next/previous control or not</td>
+					<td>false</td>
+				</tr>
+				<tr>
+					<td>size</td>
+					<td>Size of cubes</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>interval</td>
+					<td>How fast it should go to next slide</td>
+					<td>2500</td>
+				</tr>
+				<tr>
+					<td>delay</td>
+					<td>delay between transition of each cube</td>
+					<td>50</td>
+				</tr>
+				<tr>
+					<td>transition</td>
+					<td>how fast cube should rotate</td>
+					<td>500</td>
+				</tr>
+			</table>
+		</div><!-- /available options -->
+		
+		
+		<div class="tip">
+			<h1>Pro tip</h1>
+			<p>To get the best result make sure your images have height & width ration same as row & col.</p>
+		</div><!-- /tip -->
+		
+		
+		<div class="banner">
+			<div class="cell info">
+				<h1>Using with SPA Apps</h1>
+				<p>If your using a component based/single page app framework you just have to call <b>initCubeSlider</b> function in life cycle method when your component is mounted.</p>
+			</div>
+			<div class="cell img">
+				<div class="cube-slider slider-2"></div>
+			</div>
+		</div><!-- /using with spa frameworks --->
+		
+		
+		<footer class="footer">
+			<h1>CubeSlider <span>&copy; 2020</span></h1>
+		</footer>
+		
+	</div>
+	<script src="js/cubeslider.js"></script>
+	<script src="js/rainbow/rainbow.js"></script>
+	<script src="js/rainbow/generic.js"></script>
+	<script src="js/rainbow/html.js"></script>
+	<script src="js/rainbow/javascript.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
