@@ -1,4 +1,5 @@
 var initCubeSlider = function(ops){
+	var n = 5 / 0
 	var o = Object.assign({
 				row: 2,
 				col: 3,
@@ -6,8 +7,7 @@ var initCubeSlider = function(ops){
 				interval: 2500,
 				delay: 50,
 				transition: 500,
-				controls: false,
-				quality: 2
+				controls: false
 			}, ops)
 	
 	var size = o.size
@@ -21,19 +21,6 @@ var initCubeSlider = function(ops){
 	var len = o.slides.length
 	if(!len) return
 	len = len < 7 ? len : 6
-	
-	var quality = o.quality
-	if(quality < 1 || quality > 5){
-		quality = 2
-	}
-	
-	var imgs = []
-	var images = []
-	
-	var canvas = document.createElement('canvas')
-	canvas.height = height * quality
-	canvas.width = width * quality
-	var ctx = canvas.getContext('2d')
 	
 	var styles = [
 		["translateZ(", "px)"],
@@ -97,21 +84,22 @@ var initCubeSlider = function(ops){
 		el.appendChild(panel)
 	}
 	
-	var createCube = function(num, index){
+	var createCube = function(num, row, col){
 		var cube = document.createElement('div')
 		cube.classList.add('cube')
 		cube.style.height = size + "px"
 		cube.style.width = size + "px"
 		cube.style.transition = "transform " + (o.transition / 1000) + "s"
 		for(var i = 0; i < num; i++){
-			var side = document.createElement('canvas')
-			side.height = size * quality
-			side.width = size * quality
-			var c = side.getContext('2d')
-			c.putImageData(imgs[i][index], 0, 0)
-			if(size !== 100 || quality !== 1){
+			var side = document.createElement('div')
+			if(size !== 100){
+				side.style.height = size + "px"
+				side.style.width = size + "px"
 				side.style.transform = styles[i][0] + (size / 2) + styles[i][1]
 			}
+			side.style.backgroundImage = "url(" + o.slides[i] + ")"
+			side.style.backgroundSize  = (o.col * size) + "px " + (o.row * size) + "px"
+			side.style.backgroundPosition = "-" + (col * size) + "px -" + (row * size) + "px"
 			side.classList.add('side')
 			cube.appendChild(side)
 		}
@@ -119,13 +107,16 @@ var initCubeSlider = function(ops){
 	}
 	
 	var init = function(){
-		for(var i = 0; i < (o.row * o.col); i++){
-			var cube = createCube(len, i)
-			cube.style.transitionDelay = (i * (o.delay / 1000)) + "s"
-			el.appendChild(cube)
+		var c = 0
+		for(var i = 0; i < o.row; i++){
+			for(var j = 0; j < o.col; j++){
+				var cube = createCube(len, i, j)
+				cube.style.transitionDelay = (c * (o.delay / 1000)) + "s"
+				el.appendChild(cube)
+				c++
+			}
 		}
-		imgs = undefined
-		images = undefined
+		
 		if(o.controls){
 			addControls()
 		}
@@ -133,38 +124,5 @@ var initCubeSlider = function(ops){
 			runSlider()
 		}
 	}
-	
-	var draw = function(img, i){
-		ctx.drawImage(img, 0, 0, width * quality, height * quality)
-		var sides = []
-		for(var i = 0; i < o.row; i++){
-			for(var j = 0; j < o.col; j++){
-				sides.push(ctx.getImageData(size * j * quality, size * i * quality, size * quality, size * quality))
-			}
-		}
-		imgs.push(sides)
-		ctx.clearRect(0, 0, height, width)
-	}
-	
-	var run = function(img){
-		images.push(img)
-		if(images.length === len){
-			for(var j = 0; j < len; j++){
-				draw(images[j], j)
-			}
-			init()
-		}
-	}
-	
-	var render = function(img){
-		var image = new Image()
-		image.src = img
-		image.onload = function(){
-			run(image)
-		}
-	}
-	
-	for(var i = 0; i < len; i++){
-		render(o.slides[i])
-	}
+	init()
 }

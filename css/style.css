@@ -114,7 +114,9 @@ pre{
 	justify-content: center;
 	align-items: center;
 }
-
+.cell.img .cube-slider:nth-child(1){
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
 
 
 
@@ -175,13 +177,6 @@ td{
 	font-weight: light;
 	font-size: 0.8em;
 	letter-spacing: 1px;
-}
-.tip.info{
-	border-left: 5px solid #F44336;
-	background-color: #F4BEBA;
-}
-.tip.info h1, .tip.info p{
-	color: #F44336;
 }
 
 
