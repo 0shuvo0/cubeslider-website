@@ -4,6 +4,7 @@ var initCubeSlider = function(ops){
 				row: 2,
 				col: 3,
 				size: 100,
+				unit: "px",
 				interval: 2500,
 				delay: 50,
 				transition: 500,
@@ -11,24 +12,25 @@ var initCubeSlider = function(ops){
 			}, ops)
 	
 	var size = o.size
+	var u = o.unit
 	var height = o.row * size
 	var width = o.col * size
 	
 	var el = document.querySelector(o.el)
-	el.style.height = height + "px"
-	el.style.width = width + "px"
+	el.style.height = height + u
+	el.style.width = width + u
 	
 	var len = o.slides.length
 	if(!len) return
 	len = len < 7 ? len : 6
 	
 	var styles = [
-		["translateZ(", "px)"],
-		["translateZ(-", "px) rotateY(-90deg)"],
-		["translateZ(-", "px) rotateY(180deg)"],
-		["translateZ(-", "px) rotateY(90deg)"],
-		["translateZ(-", "px) rotateX(90deg)"],
-		["translateZ(-", "px) rotateX(-90deg)"]
+		["translateZ(", ")"],
+		["translateZ(-", ") rotateY(-90deg)"],
+		["translateZ(-", ") rotateY(180deg)"],
+		["translateZ(-", ") rotateY(90deg)"],
+		["translateZ(-", ") rotateX(90deg)"],
+		["translateZ(-", ") rotateX(-90deg)"]
 	]
 	
 	var count = 1
@@ -87,19 +89,19 @@ var initCubeSlider = function(ops){
 	var createCube = function(num, row, col){
 		var cube = document.createElement('div')
 		cube.classList.add('cube')
-		cube.style.height = size + "px"
-		cube.style.width = size + "px"
+		cube.style.height = size + u
+		cube.style.width = size + u
 		cube.style.transition = "transform " + (o.transition / 1000) + "s"
 		for(var i = 0; i < num; i++){
 			var side = document.createElement('div')
-			if(size !== 100){
-				side.style.height = size + "px"
-				side.style.width = size + "px"
-				side.style.transform = styles[i][0] + (size / 2) + styles[i][1]
+			if(size !== 100 || u !== "px"){
+				side.style.height = size + u
+				side.style.width = size + u
+				side.style.transform = styles[i][0] + (size / 2) + u + styles[i][1]
 			}
 			side.style.backgroundImage = "url(" + o.slides[i] + ")"
-			side.style.backgroundSize  = (o.col * size) + "px " + (o.row * size) + "px"
-			side.style.backgroundPosition = "-" + (col * size) + "px -" + (row * size) + "px"
+			side.style.backgroundSize  = (o.col * size) + u + " " + (o.row * size) + u
+			side.style.backgroundPosition = "-" + (col * size) + u + " -" + (row * size) + u
 			side.classList.add('side')
 			cube.appendChild(side)
 		}
@@ -117,10 +119,11 @@ var initCubeSlider = function(ops){
 			}
 		}
 		
-		if(o.controls){
-			addControls()
-		}
+		
 		if(len > 1){
+			if(o.controls){
+				addControls()
+			}
 			runSlider()
 		}
 	}

@@ -12,6 +12,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	background-color: #fff;
 	background-repeat: no-repeat;
 }
 .cube .side:nth-child(1){
@@ -98,5 +99,5 @@
 }
 .cube-slider .ctrl-panel .ctrl.right{
 	transform: rotate(135deg);
-	margin-left: 60px;
+	margin-left: 20%;
 }
